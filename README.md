@@ -11,12 +11,10 @@ Applications using a RDBMS of some kind quickly get messy when building SQL "fro
 function filter(params) {
   var select = "SELECT * FROM t",
       where = [],
-      bindings = {},
-      binding;
+      bindings = [];
   for (var key in params) {
-    binding = "$" + key;
-    where.push(key + " = " + binding);
-    bindings[binding] = params[key];
+    where.push(key + " = ?");
+    bindings.push(params[key]);
   }
   if (where.length > 0) {
     select += " WHERE " + where.join(" AND ");
