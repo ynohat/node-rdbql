@@ -37,7 +37,6 @@ function filter(params) {
   for (var key in params) {
     select.where(sql.equals(key, params[key]));
   }
-  return {"q": select.toString(), "params": select.params};
+  return {"q": select.toString(), "params": select.params()};
 }
 </pre>
-
