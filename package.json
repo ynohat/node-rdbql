@@ -1,31 +1,29 @@
 {
-    "name": "sql-dialects",
-    "description": "Compatible SQL query builder for node",
+    "name": "rdbql",
+    "description": "Cross compatible SQL query builder for node",
     "main": "./lib/rdbql.js",
     "author": "Anthony Hogg",
     "version": "0.0.1",
     "repository" : {
         "type" : "git",
-        "url" : "http://github.com/ynohat/rdbql.git"
+        "url" : "http://github.com/ynohat/node-rdbql.git"
     },
     "bugs" : {
-        "url" : "http://github.com/ynohat/rdbql/issues"
+        "url" : "http://github.com/ynohat/node-rdbql/issues"
     },
     "licenses" : [
         {
             "type" : "MIT",
-            "url" : "http://github.com/ynohat/rdbql/raw/master/LICENSE"
+            "url" : "http://github.com/ynohat/node-rdbql/raw/master/LICENSE"
         }
     ],
     "devDependencies": {
-        "nodeunit": ">0.0.0",
-        "uglify-js": "1.2.x",
-        "nodelint": ">0.0.0"
+        "underscore": ">0.0.0"
     },
     "jam": {
-        "main": "lib/async.js",
+        "main": "lib/rdbql.js",
         "include": [
-            "lib/async.js",
+            "lib/rdbql.js",
             "README.md",
             "LICENSE"
         ]
