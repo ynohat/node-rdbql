@@ -8,6 +8,7 @@
 ## create the ingredient table
 
 
+
 _Javascript:_
 
 <pre>
@@ -29,17 +30,14 @@ ingredient
 ) </pre>
 
 
-
 _Result:_
-
-
 
 <pre> last insert id = 0, changes = 0 </pre>
 
 
 
-
 ## create the recipe table
+
 
 
 _Javascript:_
@@ -64,17 +62,14 @@ recipe
 ) </pre>
 
 
-
 _Result:_
-
-
 
 <pre> last insert id = 0, changes = 0 </pre>
 
 
 
-
 ## create the recipe_ingredient table
+
 
 
 _Javascript:_
@@ -100,13 +95,9 @@ recipe_ingredient
 ) </pre>
 
 
-
 _Result:_
 
-
-
 <pre> last insert id = 0, changes = 0 </pre>
-
 
 
 
@@ -116,6 +107,7 @@ _Result:_
 
 
 ## add a few ingredients, using the object syntax
+
 
 
 _Javascript:_
@@ -138,17 +130,14 @@ UNION ALL
 	SELECT 2, ? /*flour*/ </pre>
 
 
-
 _Result:_
-
-
 
 <pre> last insert id = 2, changes = 2 </pre>
 
 
 
-
 ## add a few recipes, using the array syntax
+
 
 
 _Javascript:_
@@ -176,17 +165,14 @@ UNION ALL
 	SELECT 3, 4, ? /*shortbread cookies*/ </pre>
 
 
-
 _Result:_
-
-
 
 <pre> last insert id = 3, changes = 3 </pre>
 
 
 
-
 ## associate ingredients and recipes, using the mixed object/array syntax
+
 
 
 _Javascript:_
@@ -220,13 +206,9 @@ UNION ALL
 	SELECT 1, 3, 1, ? /*oz*/ </pre>
 
 
-
 _Result:_
 
-
-
 <pre> last insert id = 2, changes = 2 </pre>
-
 
 
 
@@ -236,6 +218,7 @@ _Result:_
 
 
 ## select * from recipe
+
 
 
 _Javascript:_
@@ -267,6 +250,7 @@ _Result:_
 
 
 ## select distinct id from recipe
+
 
 
 _Javascript:_

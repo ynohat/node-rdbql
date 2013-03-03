@@ -51,9 +51,9 @@ Runner.prototype.run = function (next) {
                     console.log("\n_SQL:_\n");
                     console.log("\n<pre>", q, "</pre>\n");
                     console.log();
-                    console.log("\n_Result:_\n");
+                    console.log("_Result:_");
                     console.log();
-                    console.log("\n<pre>", err || ("last insert id = "+this.lastID+", changes = "+this.changes), "</pre>\n");
+                    console.log("<pre>", err || ("last insert id = "+this.lastID+", changes = "+this.changes), "</pre>");
                     console.log();
                     next(err);
                 });
@@ -73,6 +73,7 @@ Runner.prototype.run = function (next) {
         if (this.step.js) {
             series.push(_.bind(function (next) {
                 var js = _.isArray(this.step.js) ? this.step.js.join("\n") : this.step.js;
+                console.log();
                 console.log("_Javascript:_");
                 console.log();
                 console.log("<pre>");
