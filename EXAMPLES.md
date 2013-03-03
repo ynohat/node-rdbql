@@ -12,15 +12,13 @@ sql.createTable("ingredient").columns(
 )
 </pre>
 _SQL:_
-<pre>
-CREATE TABLE
+<pre> CREATE TABLE
 ingredient
 (
 	id INT, name TEXT
-)
-params: []
-last insert id = 0, changes = 0
-</pre>
+) <pre>
+_Result:_
+<pre> last insert id = 0, changes = 0 <pre>
 
 ## create the recipe table
 
@@ -33,15 +31,13 @@ sql.createTable("recipe").columns(
 )
 </pre>
 _SQL:_
-<pre>
-CREATE TABLE
+<pre> CREATE TABLE
 recipe
 (
 	id INT, feeds INT, name TEXT
-)
-params: []
-last insert id = 0, changes = 0
-</pre>
+) <pre>
+_Result:_
+<pre> last insert id = 0, changes = 0 <pre>
 
 ## create the recipe_ingredient table
 
@@ -55,15 +51,13 @@ sql.createTable("recipe_ingredient").columns(
 )
 </pre>
 _SQL:_
-<pre>
-CREATE TABLE
+<pre> CREATE TABLE
 recipe_ingredient
 (
 	recipe_id INT, ingredient_id INT, quantity NUMERIC, unit TEXT
-)
-params: []
-last insert id = 0, changes = 0
-</pre>
+) <pre>
+_Result:_
+<pre> last insert id = 0, changes = 0 <pre>
 
 # add some recipes
 
@@ -78,14 +72,12 @@ sql.insert("ingredient").values(
 )
 </pre>
 _SQL:_
-<pre>
-INSERT INTO ingredient
+<pre> INSERT INTO ingredient
 	SELECT (1) AS id, (? /*egg*/) AS name
 UNION ALL
-	SELECT 2, ? /*flour*/
-params: [ 'egg', 'flour' ]
-last insert id = 2, changes = 2
-</pre>
+	SELECT 2, ? /*flour*/ <pre>
+_Result:_
+<pre> last insert id = 2, changes = 2 <pre>
 
 ## add a few recipes, using the array syntax
 
@@ -100,16 +92,14 @@ sql.insert("recipe")
    )
 </pre>
 _SQL:_
-<pre>
-INSERT INTO recipe
+<pre> INSERT INTO recipe
 	SELECT (1) AS id, (2) AS feeds, (? /*omelet*/) AS name
 UNION ALL
 	SELECT 2, 4, ? /*puff pastry*/
 UNION ALL
-	SELECT 3, 4, ? /*shortbread cookies*/
-params: [ 'omelet', 'puff pastry', 'shortbread cookies' ]
-last insert id = 3, changes = 3
-</pre>
+	SELECT 3, 4, ? /*shortbread cookies*/ <pre>
+_Result:_
+<pre> last insert id = 3, changes = 3 <pre>
 
 ## associate ingredients and recipes, using the mixed object/array syntax
 
@@ -132,14 +122,12 @@ sql.insert("recipe_ingredient")
    )
 </pre>
 _SQL:_
-<pre>
-INSERT INTO recipe_ingredient
+<pre> INSERT INTO recipe_ingredient
 	SELECT (1) AS recipe_id, (1) AS ingredient_id, (6) AS quantity, (NULL) AS unit
 UNION ALL
-	SELECT 1, 3, 1, ? /*oz*/
-params: [ 'oz' ]
-last insert id = 2, changes = 2
-</pre>
+	SELECT 1, 3, 1, ? /*oz*/ <pre>
+_Result:_
+<pre> last insert id = 2, changes = 2 <pre>
 
 # select examples
 
@@ -151,13 +139,11 @@ _Javascript:_
 sql.select().from("recipe")
 </pre>
 _SQL:_
-<pre>
-SELECT * FROM recipe 
-params: []
-[ { id: 1, feeds: 2, name: 'omelet' },
+<pre> SELECT * FROM recipe  <pre>
+_Result:_
+<pre> [ { id: 1, feeds: 2, name: 'omelet' },
   { id: 2, feeds: 4, name: 'puff pastry' },
-  { id: 3, feeds: 4, name: 'shortbread cookies' } ]
-</pre>
+  { id: 3, feeds: 4, name: 'shortbread cookies' } ] <pre>
 
 ## select distinct id from recipe
 
@@ -166,9 +152,7 @@ _Javascript:_
 sql.select("id").distinct().from("recipe")
 </pre>
 _SQL:_
-<pre>
-SELECT DISTINCT id FROM recipe 
-params: []
-[ { id: 1 }, { id: 2 }, { id: 3 } ]
-</pre>
+<pre> SELECT DISTINCT id FROM recipe  <pre>
+_Result:_
+<pre> [ { id: 1 }, { id: 2 }, { id: 3 } ] <pre>
 that's it!
