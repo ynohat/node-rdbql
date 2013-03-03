@@ -35,11 +35,11 @@ Runner.prototype.run = function (next) {
                     console.log(); console.log();
                     console.log("_SQL:_");
                     console.log(); console.log();
-                    console.log("<pre>", q, "</pre>");
+                    console.log("<pre>"); console.log(q); console.log("</pre>");
                     console.log(); console.log();
                     console.log("_Result:_");
                     console.log(); console.log();
-                    console.log("<pre>", err || rows, "</pre>");
+                    console.log("<pre>"); console.log(err || rows); console.log("</pre>");
                     console.log(); console.log();
                     next(err, rows);
                 });
@@ -50,11 +50,11 @@ Runner.prototype.run = function (next) {
                     console.log(); console.log();
                     console.log("_SQL:_");
                     console.log(); console.log();
-                    console.log("<pre>", q, "</pre>");
+                    console.log("<pre>"); console.log(q); console.log("</pre>");
                     console.log(); console.log();
                     console.log("_Result:_");
                     console.log(); console.log();
-                    console.log("<pre>", err || ("last insert id = "+this.lastID+", changes = "+this.changes), "</pre>");
+                    console.log("<pre>"); console.log(err || ("last insert id = "+this.lastID+", changes = "+this.changes)); console.log("</pre>");
                     console.log(); console.log();
                     next(err);
                 });
@@ -75,7 +75,7 @@ Runner.prototype.run = function (next) {
                 console.log(); console.log();
                 console.log("_Javascript:_");
                 console.log(); console.log();
-                console.log("<pre>", js, "</pre>");
+                console.log("<pre>"); console.log(js); console.log("</pre>");
                 console.log(); console.log();
                 var runner = this.createRunner(eval(js));
                 runner.run(next);
