@@ -34,7 +34,7 @@ Runner.prototype.run = function (next) {
                 this.adapter.all(q, p, function (err, rows) {
                     console.log("_SQL:_");
                     console.log("\n<pre>", q, "</pre>\n");
-                    console.log("_Result:_");
+                    console.log("\n_Result:_");
                     console.log("\n<pre>", err || rows, "</pre>\n");
                     next(err, rows);
                 });
@@ -44,8 +44,8 @@ Runner.prototype.run = function (next) {
                 this.adapter.run(q, p, function (err) {
                     console.log("_SQL:_");
                     console.log("\n<pre>", q, "</pre>\n");
-                    console.log("_Result:_");
-                    console.log("\n<pre>", err || ("last insert id = "+this.lastID+", changes = "+this.changes), "</pre>");
+                    console.log("\n_Result:_");
+                    console.log("\n<pre>", err || ("last insert id = "+this.lastID+", changes = "+this.changes), "</pre>\n");
                     next(err);
                 });
             }, this));            

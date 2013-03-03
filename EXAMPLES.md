@@ -19,9 +19,11 @@ ingredient
 	id INT, name TEXT
 ) </pre>
 
+
 _Result:_
 
 <pre> last insert id = 0, changes = 0 </pre>
+
 
 ## create the recipe table
 
@@ -41,9 +43,11 @@ recipe
 	id INT, feeds INT, name TEXT
 ) </pre>
 
+
 _Result:_
 
 <pre> last insert id = 0, changes = 0 </pre>
+
 
 ## create the recipe_ingredient table
 
@@ -64,9 +68,11 @@ recipe_ingredient
 	recipe_id INT, ingredient_id INT, quantity NUMERIC, unit TEXT
 ) </pre>
 
+
 _Result:_
 
 <pre> last insert id = 0, changes = 0 </pre>
+
 
 # add some recipes
 
@@ -87,9 +93,11 @@ _SQL:_
 UNION ALL
 	SELECT 2, ? /*flour*/ </pre>
 
+
 _Result:_
 
 <pre> last insert id = 2, changes = 2 </pre>
+
 
 ## add a few recipes, using the array syntax
 
@@ -112,9 +120,11 @@ UNION ALL
 UNION ALL
 	SELECT 3, 4, ? /*shortbread cookies*/ </pre>
 
+
 _Result:_
 
 <pre> last insert id = 3, changes = 3 </pre>
+
 
 ## associate ingredients and recipes, using the mixed object/array syntax
 
@@ -143,9 +153,11 @@ _SQL:_
 UNION ALL
 	SELECT 1, 3, 1, ? /*oz*/ </pre>
 
+
 _Result:_
 
 <pre> last insert id = 2, changes = 2 </pre>
+
 
 # select examples
 
@@ -159,6 +171,7 @@ sql.select().from("recipe")
 _SQL:_
 
 <pre> SELECT * FROM recipe  </pre>
+
 
 _Result:_
 
@@ -176,6 +189,7 @@ sql.select("id").distinct().from("recipe")
 _SQL:_
 
 <pre> SELECT DISTINCT id FROM recipe  </pre>
+
 
 _Result:_
 
