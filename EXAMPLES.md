@@ -1,16 +1,23 @@
 
+
 # create the database schema
+
+
 
 
 ## create the ingredient table
 
+
 _Javascript:_
+
 <pre>
 sql.createTable("ingredient").columns(
    "id INT",
    "name TEXT"
 )
 </pre>
+
+
 
 _SQL:_
 
@@ -22,15 +29,21 @@ ingredient
 ) </pre>
 
 
+
 _Result:_
+
 
 
 <pre> last insert id = 0, changes = 0 </pre>
 
 
+
+
 ## create the recipe table
 
+
 _Javascript:_
+
 <pre>
 sql.createTable("recipe").columns(
    "id INT",
@@ -38,6 +51,8 @@ sql.createTable("recipe").columns(
    "name TEXT"
 )
 </pre>
+
+
 
 _SQL:_
 
@@ -49,15 +64,21 @@ recipe
 ) </pre>
 
 
+
 _Result:_
+
 
 
 <pre> last insert id = 0, changes = 0 </pre>
 
 
+
+
 ## create the recipe_ingredient table
 
+
 _Javascript:_
+
 <pre>
 sql.createTable("recipe_ingredient").columns(
    "recipe_id INT",
@@ -66,6 +87,8 @@ sql.createTable("recipe_ingredient").columns(
    "unit TEXT"
 )
 </pre>
+
+
 
 _SQL:_
 
@@ -77,24 +100,34 @@ recipe_ingredient
 ) </pre>
 
 
+
 _Result:_
+
 
 
 <pre> last insert id = 0, changes = 0 </pre>
 
 
+
+
 # add some recipes
+
+
 
 
 ## add a few ingredients, using the object syntax
 
+
 _Javascript:_
+
 <pre>
 sql.insert("ingredient").values(
    {id: 1, name: sql.$("egg")},
    {id: 2, name: sql.$("flour")}
 )
 </pre>
+
+
 
 _SQL:_
 
@@ -105,15 +138,21 @@ UNION ALL
 	SELECT 2, ? /*flour*/ </pre>
 
 
+
 _Result:_
+
 
 
 <pre> last insert id = 2, changes = 2 </pre>
 
 
+
+
 ## add a few recipes, using the array syntax
 
+
 _Javascript:_
+
 <pre>
 sql.insert("recipe")
    .columns("id", "feeds", "name") /* this call is optional */
@@ -123,6 +162,8 @@ sql.insert("recipe")
       [3, 4, sql.$("shortbread cookies")]
    )
 </pre>
+
+
 
 _SQL:_
 
@@ -135,15 +176,21 @@ UNION ALL
 	SELECT 3, 4, ? /*shortbread cookies*/ </pre>
 
 
+
 _Result:_
+
 
 
 <pre> last insert id = 3, changes = 3 </pre>
 
 
+
+
 ## associate ingredients and recipes, using the mixed object/array syntax
 
+
 _Javascript:_
+
 <pre>
 sql.insert("recipe_ingredient")
    .columns( /* this call is compulsory when mixing arrays and objects */
@@ -162,6 +209,8 @@ sql.insert("recipe_ingredient")
    )
 </pre>
 
+
+
 _SQL:_
 
 
@@ -171,29 +220,42 @@ UNION ALL
 	SELECT 1, 3, 1, ? /*oz*/ </pre>
 
 
+
 _Result:_
+
 
 
 <pre> last insert id = 2, changes = 2 </pre>
 
 
+
+
 # select examples
+
+
 
 
 ## select * from recipe
 
+
 _Javascript:_
+
 <pre>
 sql.select().from("recipe")
 </pre>
 
+
+
 _SQL:_
+
 
 
 <pre> SELECT * FROM recipe  </pre>
 
 
+
 _Result:_
+
 
 
 <pre> [ { id: 1, feeds: 2, name: 'omelet' },
@@ -202,23 +264,33 @@ _Result:_
 
 
 
+
+
 ## select distinct id from recipe
 
+
 _Javascript:_
+
 <pre>
 sql.select("id").distinct().from("recipe")
 </pre>
 
+
+
 _SQL:_
+
 
 
 <pre> SELECT DISTINCT id FROM recipe  </pre>
 
 
+
 _Result:_
 
 
+
 <pre> [ { id: 1 }, { id: 2 }, { id: 3 } ] </pre>
+
 
 
 that's it!

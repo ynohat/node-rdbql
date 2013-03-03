@@ -32,20 +32,29 @@ Runner.prototype.run = function (next) {
         if (this.step instanceof sql.select) {
             series.push(_.bind(function (next) {
                 this.adapter.all(q, p, function (err, rows) {
+                    console.log();
                     console.log("\n_SQL:_\n");
+                    console.log();
                     console.log("\n<pre>", q, "</pre>\n");
+                    console.log();
                     console.log("\n_Result:_\n");
+                    console.log();
                     console.log("\n<pre>", err || rows, "</pre>\n\n");
+                    console.log();
                     next(err, rows);
                 });
             }, this));
         } else {
             series.push(_.bind(function (next) {
                 this.adapter.run(q, p, function (err) {
+                    console.log();
                     console.log("\n_SQL:_\n");
                     console.log("\n<pre>", q, "</pre>\n");
+                    console.log();
                     console.log("\n_Result:_\n");
+                    console.log();
                     console.log("\n<pre>", err || ("last insert id = "+this.lastID+", changes = "+this.changes), "</pre>\n");
+                    console.log();
                     next(err);
                 });
             }, this));            
@@ -54,7 +63,9 @@ Runner.prototype.run = function (next) {
         if (this.step.comment) {
             series.push(_.bind(function (next) {
                 console.log();
+                console.log();
                 console.log(( this.level && repeat('#', this.level)+" " || "") + this.step.comment);
+                console.log();
                 console.log();
                 next();
             }, this));
@@ -63,9 +74,11 @@ Runner.prototype.run = function (next) {
             series.push(_.bind(function (next) {
                 var js = _.isArray(this.step.js) ? this.step.js.join("\n") : this.step.js;
                 console.log("_Javascript:_");
+                console.log();
                 console.log("<pre>");
                 console.log(js);
                 console.log("</pre>");
+                console.log();
                 var runner = this.createRunner(eval(js));
                 runner.run(next);
             }, this));
