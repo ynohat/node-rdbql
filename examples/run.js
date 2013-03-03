@@ -33,9 +33,9 @@ Runner.prototype.run = function (next) {
             series.push(_.bind(function (next) {
                 this.adapter.all(q, p, function (err, rows) {
                     console.log("_SQL:_");
-                    console.log("<pre>", q, "<pre>");
+                    console.log("<pre>", q, "</pre>");
                     console.log("_Result:_");
-                    console.log("<pre>", err || rows, "<pre>");
+                    console.log("<pre>", err || rows, "</pre>");
                     next(err, rows);
                 });
             }, this));
@@ -43,9 +43,9 @@ Runner.prototype.run = function (next) {
             series.push(_.bind(function (next) {
                 this.adapter.run(q, p, function (err) {
                     console.log("_SQL:_");
-                    console.log("<pre>", q, "<pre>");
+                    console.log("<pre>", q, "</pre>");
                     console.log("_Result:_");
-                    console.log("<pre>", err || ("last insert id = "+this.lastID+", changes = "+this.changes), "<pre>");
+                    console.log("<pre>", err || ("last insert id = "+this.lastID+", changes = "+this.changes), "</pre>");
                     next(err);
                 });
             }, this));            
