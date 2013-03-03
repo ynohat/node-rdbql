@@ -32,15 +32,15 @@ Runner.prototype.run = function (next) {
         if (this.step instanceof sql.select) {
             series.push(_.bind(function (next) {
                 this.adapter.all(q, p, function (err, rows) {
-                    console.log();
-                    console.log("\n_SQL:_\n");
-                    console.log();
-                    console.log("\n<pre>", q, "</pre>\n");
-                    console.log();
-                    console.log("\n_Result:_\n");
-                    console.log();
-                    console.log("\n<pre>", err || rows, "</pre>\n\n");
-                    console.log();
+                    console.log(); console.log();
+                    console.log("_SQL:_");
+                    console.log(); console.log();
+                    console.log("<pre>", q, "</pre>");
+                    console.log(); console.log();
+                    console.log("_Result:_");
+                    console.log(); console.log();
+                    console.log("<pre>", err || rows, "</pre>");
+                    console.log(); console.log();
                     next(err, rows);
                 });
             }, this));
@@ -49,6 +49,7 @@ Runner.prototype.run = function (next) {
                 this.adapter.run(q, p, function (err) {
                     console.log(); console.log();
                     console.log("_SQL:_");
+                    console.log(); console.log();
                     console.log("<pre>", q, "</pre>");
                     console.log(); console.log();
                     console.log("_Result:_");

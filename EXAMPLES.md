@@ -22,6 +22,8 @@ _Javascript:_
 
 
 _SQL:_
+
+
 <pre> CREATE TABLE
 ingredient
 (
@@ -55,6 +57,8 @@ _Javascript:_
 
 
 _SQL:_
+
+
 <pre> CREATE TABLE
 recipe
 (
@@ -89,6 +93,8 @@ _Javascript:_
 
 
 _SQL:_
+
+
 <pre> CREATE TABLE
 recipe_ingredient
 (
@@ -126,6 +132,8 @@ _Javascript:_
 
 
 _SQL:_
+
+
 <pre> INSERT INTO ingredient
 	SELECT (1) AS id, (? /*egg*/) AS name
 UNION ALL
@@ -160,6 +168,8 @@ _Javascript:_
 
 
 _SQL:_
+
+
 <pre> INSERT INTO recipe
 	SELECT (1) AS id, (2) AS feeds, (? /*omelet*/) AS name
 UNION ALL
@@ -204,6 +214,8 @@ _Javascript:_
 
 
 _SQL:_
+
+
 <pre> INSERT INTO recipe_ingredient
 	SELECT (1) AS recipe_id, (1) AS ingredient_id, (6) AS quantity, (NULL) AS unit
 UNION ALL
@@ -239,19 +251,15 @@ _Javascript:_
 _SQL:_
 
 
-
 <pre> SELECT * FROM recipe  </pre>
-
 
 
 _Result:_
 
 
-
 <pre> [ { id: 1, feeds: 2, name: 'omelet' },
   { id: 2, feeds: 4, name: 'puff pastry' },
   { id: 3, feeds: 4, name: 'shortbread cookies' } ] </pre>
-
 
 
 
@@ -272,17 +280,13 @@ _Javascript:_
 _SQL:_
 
 
-
 <pre> SELECT DISTINCT id FROM recipe  </pre>
-
 
 
 _Result:_
 
 
-
 <pre> [ { id: 1 }, { id: 2 }, { id: 3 } ] </pre>
-
 
 
 that's it!
