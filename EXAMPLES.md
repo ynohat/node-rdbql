@@ -4,20 +4,27 @@
 
 ## create the ingredient table
 
+_Javascript:_
 <pre>
 sql.createTable("ingredient").columns(
    "id INT",
    "name TEXT"
 )
 </pre>
+_SQL:_
 <pre>
-CREATE TABLE ingredient ( id INT, name TEXT )
+CREATE TABLE
+ingredient
+(
+	id INT, name TEXT
+)
 params: []
 last insert id = 0, changes = 0
 </pre>
 
 ## create the recipe table
 
+_Javascript:_
 <pre>
 sql.createTable("recipe").columns(
    "id INT",
@@ -25,14 +32,20 @@ sql.createTable("recipe").columns(
    "name TEXT"
 )
 </pre>
+_SQL:_
 <pre>
-CREATE TABLE recipe ( id INT, feeds INT, name TEXT )
+CREATE TABLE
+recipe
+(
+	id INT, feeds INT, name TEXT
+)
 params: []
 last insert id = 0, changes = 0
 </pre>
 
 ## create the recipe_ingredient table
 
+_Javascript:_
 <pre>
 sql.createTable("recipe_ingredient").columns(
    "recipe_id INT",
@@ -41,8 +54,13 @@ sql.createTable("recipe_ingredient").columns(
    "unit TEXT"
 )
 </pre>
+_SQL:_
 <pre>
-CREATE TABLE recipe_ingredient ( recipe_id INT, ingredient_id INT, quantity NUMERIC, unit TEXT )
+CREATE TABLE
+recipe_ingredient
+(
+	recipe_id INT, ingredient_id INT, quantity NUMERIC, unit TEXT
+)
 params: []
 last insert id = 0, changes = 0
 </pre>
@@ -52,20 +70,26 @@ last insert id = 0, changes = 0
 
 ## add a few ingredients, using the object syntax
 
+_Javascript:_
 <pre>
 sql.insert("ingredient").values(
    {id: 1, name: sql.$("egg")},
    {id: 2, name: sql.$("flour")}
 )
 </pre>
+_SQL:_
 <pre>
-INSERT INTO ingredient SELECT (1) AS id, (?) AS name UNION ALL SELECT (2) AS id, (?) AS name
+INSERT INTO ingredient
+	SELECT (1) AS id, (? /*egg*/) AS name
+UNION ALL
+	SELECT 2, ? /*flour*/
 params: [ 'egg', 'flour' ]
 last insert id = 2, changes = 2
 </pre>
 
 ## add a few recipes, using the array syntax
 
+_Javascript:_
 <pre>
 sql.insert("recipe")
    .columns("id", "feeds", "name") /* this call is optional */
@@ -75,14 +99,21 @@ sql.insert("recipe")
       [3, 4, sql.$("shortbread cookies")]
    )
 </pre>
+_SQL:_
 <pre>
-INSERT INTO recipe SELECT (1) AS id, (2) AS feeds, (?) AS name UNION ALL SELECT (2) AS id, (4) AS feeds, (?) AS name UNION ALL SELECT (3) AS id, (4) AS feeds, (?) AS name
+INSERT INTO recipe
+	SELECT (1) AS id, (2) AS feeds, (? /*omelet*/) AS name
+UNION ALL
+	SELECT 2, 4, ? /*puff pastry*/
+UNION ALL
+	SELECT 3, 4, ? /*shortbread cookies*/
 params: [ 'omelet', 'puff pastry', 'shortbread cookies' ]
 last insert id = 3, changes = 3
 </pre>
 
 ## associate ingredients and recipes, using the mixed object/array syntax
 
+_Javascript:_
 <pre>
 sql.insert("recipe_ingredient")
    .columns( /* this call is compulsory when mixing arrays and objects */
@@ -100,8 +131,12 @@ sql.insert("recipe_ingredient")
       }
    )
 </pre>
+_SQL:_
 <pre>
-INSERT INTO recipe_ingredient SELECT (1) AS recipe_id, (1) AS ingredient_id, (6) AS quantity, (NULL) AS unit UNION ALL SELECT (1) AS recipe_id, (3) AS ingredient_id, (1) AS quantity, (?) AS unit
+INSERT INTO recipe_ingredient
+	SELECT (1) AS recipe_id, (1) AS ingredient_id, (6) AS quantity, (NULL) AS unit
+UNION ALL
+	SELECT 1, 3, 1, ? /*oz*/
 params: [ 'oz' ]
 last insert id = 2, changes = 2
 </pre>
@@ -111,9 +146,11 @@ last insert id = 2, changes = 2
 
 ## select * from recipe
 
+_Javascript:_
 <pre>
 sql.select().from("recipe")
 </pre>
+_SQL:_
 <pre>
 SELECT * FROM recipe 
 params: []
@@ -124,9 +161,11 @@ params: []
 
 ## select distinct id from recipe
 
+_Javascript:_
 <pre>
 sql.select("id").distinct().from("recipe")
 </pre>
+_SQL:_
 <pre>
 SELECT DISTINCT id FROM recipe 
 params: []
