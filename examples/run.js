@@ -32,19 +32,19 @@ Runner.prototype.run = function (next) {
         if (this.step instanceof sql.select) {
             series.push(_.bind(function (next) {
                 this.adapter.all(q, p, function (err, rows) {
-                    console.log("_SQL:_");
+                    console.log("\n_SQL:_\n");
                     console.log("\n<pre>", q, "</pre>\n");
-                    console.log("\n_Result:_");
-                    console.log("\n<pre>", err || rows, "</pre>\n");
+                    console.log("\n_Result:_\n");
+                    console.log("\n<pre>", err || rows, "</pre>\n\n");
                     next(err, rows);
                 });
             }, this));
         } else {
             series.push(_.bind(function (next) {
                 this.adapter.run(q, p, function (err) {
-                    console.log("_SQL:_");
+                    console.log("\n_SQL:_\n");
                     console.log("\n<pre>", q, "</pre>\n");
-                    console.log("\n_Result:_");
+                    console.log("\n_Result:_\n");
                     console.log("\n<pre>", err || ("last insert id = "+this.lastID+", changes = "+this.changes), "</pre>\n");
                     next(err);
                 });
