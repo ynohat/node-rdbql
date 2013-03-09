@@ -13,6 +13,27 @@ module.exports = {
             js: [
                 'sql.select("id").distinct().from("recipe")'
             ]
+        },
+
+        {
+            comment: 'select even ids',
+            js: [
+                'sql.select("id").distinct().from("recipe").where("id % 2 = 0")'
+            ]
+        },
+
+        {
+            comment: 'select ids over some user value (2 in this example)',
+            js: [
+                'sql.select("id").from("recipe").where(sql.$("id > ?", 2))'
+            ]
+        },
+
+        {
+            comment: 'select ids from a set of values',
+            js: [
+                'sql.select("id").from("recipe").where(sql.$("id IN (?)", [1, 2, 3, 4]))'
+            ]
         }
     ]
 };
