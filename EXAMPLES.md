@@ -337,4 +337,103 @@ _Result:_
 </pre>
 
 
+
+
+## select even ids
+
+
+
+
+_Javascript:_
+
+
+<pre>
+sql.select("id").distinct().from("recipe").where("id % 2 = 0")
+</pre>
+
+
+
+
+_SQL:_
+
+
+<pre>
+SELECT DISTINCT id FROM recipe  WHERE (id % 2 = 0)
+</pre>
+
+
+_Result:_
+
+
+<pre>
+[ { id: 2 } ]
+</pre>
+
+
+
+
+## select ids over some user value (2 in this example)
+
+
+
+
+_Javascript:_
+
+
+<pre>
+sql.select("id").from("recipe").where(sql.$("id > ?", 2))
+</pre>
+
+
+
+
+_SQL:_
+
+
+<pre>
+SELECT id FROM recipe  WHERE (id > ? /*2*/)
+</pre>
+
+
+_Result:_
+
+
+<pre>
+[ { id: 3 } ]
+</pre>
+
+
+
+
+## select ids from a set of values
+
+
+
+
+_Javascript:_
+
+
+<pre>
+sql.select("id").from("recipe").where(sql.$("id IN (?)", [1, 2, 3, 4]))
+</pre>
+
+
+
+
+_SQL:_
+
+
+<pre>
+SELECT id FROM recipe  WHERE (id IN (? /*1*/, ? /*2*/, ? /*3*/, ? /*4*/))
+</pre>
+
+
+_Result:_
+
+
+<pre>
+[ { id: 1 }, { id: 2 }, { id: 3 } ]
+</pre>
+
+
 that's it!
