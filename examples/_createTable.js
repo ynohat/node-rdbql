@@ -1,5 +1,5 @@
 module.exports = {
-    comment: 'create the database schema',
+    comment: 'CREATE TABLE examples',
     transaction: [
         {
             comment: 'create the ingredient table',

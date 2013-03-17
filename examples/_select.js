@@ -1,5 +1,5 @@
 module.exports = {
-    comment: 'select examples',
+    comment: 'SELECT examples',
     transaction: [
         {
             comment: 'select * from recipe',

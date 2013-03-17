@@ -1,5 +1,5 @@
 
-# create the database schema
+# CREATE TABLE examples
 
 
 ## create the ingredient table
@@ -95,7 +95,7 @@ last insert id = 0, changes = 0
 </pre>
 
 
-# add some recipes
+# INSERT statement examples
 
 
 ## add a few ingredients, using the object syntax
@@ -201,7 +201,7 @@ last insert id = 2, changes = 2
 </pre>
 
 
-# select examples
+# SELECT examples
 
 
 ## select * from recipe
@@ -467,6 +467,170 @@ _Result:_
     recipe_name: 'shortbread cookies',
     ingredient_id: null,
     ingredient_name: null } ]
+</pre>
+
+
+# UPDATE examples
+
+
+## make the "omelet" recipe (id = 1) feed 4, not 2 people
+
+
+### update ingredient quantities...
+
+
+_Javascript:_
+
+<pre>
+sql.update("recipe_ingredient")
+   .set({"quantity": "quantity * 2"})
+   .where("recipe_id = 1")
+</pre>
+
+
+_SQL:_
+
+<pre>
+UPDATE recipe_ingredient SET quantity = quantity * 2 WHERE (recipe_id = 1)
+</pre>
+
+_Result:_
+
+<pre>
+last insert id = 2, changes = 2
+</pre>
+
+
+### update recipe "feeds" field to match
+
+
+_Javascript:_
+
+<pre>
+sql.update("recipe")
+   .set({"feeds": "feeds * 2"})
+   .where("id = 1")
+</pre>
+
+
+_SQL:_
+
+<pre>
+UPDATE recipe SET feeds = feeds * 2 WHERE (id = 1)
+</pre>
+
+_Result:_
+
+<pre>
+last insert id = 2, changes = 1
+</pre>
+
+
+### check our results
+
+
+_Javascript:_
+
+<pre>
+sql.select({
+   "recipe": "r.name",
+   "feeds": "r.feeds",
+   "ingredient": "i.name",
+   "quantity": "ri.quantity"
+}).from({"r": "recipe"})
+.join({"ri": "recipe_ingredient"}, "r.id = ri.recipe_id")
+.join({"i": "ingredient"}, "ri.ingredient_id = i.id")
+.where("r.id = 1")
+</pre>
+
+
+_SQL:_
+
+<pre>
+SELECT r.name AS recipe, r.feeds AS feeds, i.name AS ingredient, ri.quantity AS quantity FROM recipe AS r INNER JOIN recipe_ingredient AS ri ON r.id = ri.recipe_id INNER JOIN ingredient AS i ON ri.ingredient_id = i.id WHERE (r.id = 1)
+</pre>
+
+_Result:_
+
+<pre>
+[ { recipe: 'omelet', feeds: 4, ingredient: 'egg', quantity: 12 } ]
+</pre>
+
+
+# DELETE examples
+
+
+## who are we kidding, we cannot handle puff pastry
+
+
+### so we need to remove the recipe...
+
+
+_Javascript:_
+
+<pre>
+sql.delete("recipe").where("id = 2")
+</pre>
+
+
+_SQL:_
+
+<pre>
+DELETE FROM recipe WHERE (id = 2)
+</pre>
+
+_Result:_
+
+<pre>
+last insert id = 2, changes = 1
+</pre>
+
+
+### and any association with ingredients
+
+
+_Javascript:_
+
+<pre>
+sql.delete("recipe_ingredient").where("recipe_id = 2")
+</pre>
+
+
+_SQL:_
+
+<pre>
+DELETE FROM recipe_ingredient WHERE (recipe_id = 2)
+</pre>
+
+_Result:_
+
+<pre>
+last insert id = 2, changes = 0
+</pre>
+
+
+### and any ingredient that was only there for puff pastry
+
+
+_Javascript:_
+
+<pre>
+var selectRecipeIngredientId = sql.select("ingredient_id").from("recipe_ingredient");
+sql.delete("ingredient")
+   .where(sql.$("id NOT IN (?)", selectRecipeIngredientId))
+</pre>
+
+
+_SQL:_
+
+<pre>
+DELETE FROM ingredient WHERE (id NOT IN (SELECT ingredient_id FROM recipe_ingredient ))
+</pre>
+
+_Result:_
+
+<pre>
+last insert id = 2, changes = 1
 </pre>
 
 that's it!

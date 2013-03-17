@@ -102,6 +102,8 @@ var transaction = [
     require('./_createTable.js'),
     require('./_insert.js'),
     require('./_select.js'),
+    require('./_update.js'),
+    require('./_delete.js'),
 ];
 
 var runner = new Runner(new sqlite3.Database(':memory:'), 0, transaction);

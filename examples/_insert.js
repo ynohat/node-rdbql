@@ -1,5 +1,5 @@
 module.exports = {
-    comment: 'add some recipes',
+    comment: 'INSERT statement examples',
     transaction: [
         {
             comment: 'add a few ingredients, using the object syntax',
