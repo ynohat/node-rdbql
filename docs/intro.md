@@ -28,7 +28,7 @@ Every expression in the library inherits from expr. Most of the time, you won't 
 
 ## Statements
 
-"Public" expressions your code will be calling usually inherit extend _sql.statement_. There's nothing particular about statements, except that they can be executed using your favourite adapter.
+Your code will ususally use expressions that extend _sql.statement_. There's nothing particular about statements, except that they can be executed using your favourite adapter.
 
 Detailed documentation for specific statements is available at the following locations:
 
@@ -40,9 +40,9 @@ Detailed documentation for specific statements is available at the following loc
 
 ## Parameters
 
-You're bound to use parameters in your SQL. The library makes it easy to do so, using the _$_ method. When your query is rendered, each bound parameter is substituted with a "?", and added to the positional parameter list.
+You're bound to use parameters in your SQL (no pun intended). The library makes it easy to do so, using the _$_ method. When your query is rendered, each bound parameter is substituted with a "?", and added to the positional parameter list.
 
-which supports two distinct syntaxes:
+Two different syntaxes are supported.
 
 ### Single literal
 
