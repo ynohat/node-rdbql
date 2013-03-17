@@ -49,9 +49,9 @@ function filter(params) {
 
 ## Formal documentation
 
-[Introduction](docs/intro.md)
-[Schema definition](docs/schemadef.md)
-[Insert statements](docs/insert.md)
-[Select statements](docs/select.md)
-[Update statements](docs/update.md)
-[delete statements](docs/delete.md)
+* [Introduction](docs/intro.md)
+* [Schema definition](docs/schemadef.md)
+* [Insert statements](docs/insert.md)
+* [Select statements](docs/select.md)
+* [Update statements](docs/update.md)
+* [delete statements](docs/delete.md)
