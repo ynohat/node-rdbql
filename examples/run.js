@@ -32,30 +32,30 @@ Runner.prototype.run = function (next) {
         if (this.step instanceof sql.select) {
             series.push(_.bind(function (next) {
                 this.adapter.all(q, p, function (err, rows) {
-                    console.log(); console.log();
+                    console.log();
                     console.log("_SQL:_");
-                    console.log(); console.log();
+                    console.log();
                     console.log("<pre>"); console.log(q); console.log("</pre>");
-                    console.log(); console.log();
+                    console.log();
                     console.log("_Result:_");
-                    console.log(); console.log();
+                    console.log();
                     console.log("<pre>"); console.log(err || rows); console.log("</pre>");
-                    console.log(); console.log();
+                    console.log();
                     next(err, rows);
                 });
             }, this));
         } else {
             series.push(_.bind(function (next) {
                 this.adapter.run(q, p, function (err) {
-                    console.log(); console.log();
+                    console.log();
                     console.log("_SQL:_");
-                    console.log(); console.log();
+                    console.log();
                     console.log("<pre>"); console.log(q); console.log("</pre>");
-                    console.log(); console.log();
+                    console.log();
                     console.log("_Result:_");
-                    console.log(); console.log();
+                    console.log();
                     console.log("<pre>"); console.log(err || ("last insert id = "+this.lastID+", changes = "+this.changes)); console.log("</pre>");
-                    console.log(); console.log();
+                    console.log();
                     next(err);
                 });
             }, this));            
@@ -63,20 +63,20 @@ Runner.prototype.run = function (next) {
     } else if (_.isObject(this.step)) {
         if (this.step.comment) {
             series.push(_.bind(function (next) {
-                console.log(); console.log();
+                console.log();
                 console.log(( this.level && repeat('#', this.level)+" " || "") + this.step.comment);
-                console.log(); console.log();
+                console.log();
                 next();
             }, this));
         }
         if (this.step.js) {
             series.push(_.bind(function (next) {
                 var js = _.isArray(this.step.js) ? this.step.js.join("\n") : this.step.js;
-                console.log(); console.log();
+                console.log();
                 console.log("_Javascript:_");
-                console.log(); console.log();
+                console.log();
                 console.log("<pre>"); console.log(js); console.log("</pre>");
-                console.log(); console.log();
+                console.log();
                 var runner = this.createRunner(eval(js));
                 runner.run(next);
             }, this));
@@ -99,8 +99,8 @@ Runner.prototype.createRunner = function (step) {
 };
 
 var transaction = [
-    require('./_initSchema.js'),
-    require('./_insertRows.js'),
+    require('./_createTable.js'),
+    require('./_insert.js'),
     require('./_select.js'),
 ];
 

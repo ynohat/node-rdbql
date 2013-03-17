@@ -1,17 +1,11 @@
 
-
 # create the database schema
-
-
 
 
 ## create the ingredient table
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.createTable("ingredient").columns(
@@ -21,10 +15,7 @@ sql.createTable("ingredient").columns(
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 CREATE TABLE
@@ -34,24 +25,17 @@ ingredient
 )
 </pre>
 
-
 _Result:_
-
 
 <pre>
 last insert id = 0, changes = 0
 </pre>
 
 
-
-
 ## create the recipe table
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.createTable("recipe").columns(
@@ -62,10 +46,7 @@ sql.createTable("recipe").columns(
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 CREATE TABLE
@@ -75,24 +56,17 @@ recipe
 )
 </pre>
 
-
 _Result:_
-
 
 <pre>
 last insert id = 0, changes = 0
 </pre>
 
 
-
-
 ## create the recipe_ingredient table
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.createTable("recipe_ingredient").columns(
@@ -104,10 +78,7 @@ sql.createTable("recipe_ingredient").columns(
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 CREATE TABLE
@@ -117,29 +88,20 @@ recipe_ingredient
 )
 </pre>
 
-
 _Result:_
-
 
 <pre>
 last insert id = 0, changes = 0
 </pre>
 
 
-
-
 # add some recipes
-
-
 
 
 ## add a few ingredients, using the object syntax
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.insert("ingredient").values(
@@ -149,10 +111,7 @@ sql.insert("ingredient").values(
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 INSERT INTO ingredient
@@ -161,24 +120,17 @@ UNION ALL
 	SELECT 2, ? /*flour*/
 </pre>
 
-
 _Result:_
-
 
 <pre>
 last insert id = 2, changes = 2
 </pre>
 
 
-
-
 ## add a few recipes, using the array syntax
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.insert("recipe")
@@ -191,10 +143,7 @@ sql.insert("recipe")
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 INSERT INTO recipe
@@ -205,24 +154,17 @@ UNION ALL
 	SELECT 3, 4, ? /*shortbread cookies*/
 </pre>
 
-
 _Result:_
-
 
 <pre>
 last insert id = 3, changes = 3
 </pre>
 
 
-
-
 ## associate ingredients and recipes, using the mixed object/array syntax
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.insert("recipe_ingredient")
@@ -243,10 +185,7 @@ sql.insert("recipe_ingredient")
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 INSERT INTO recipe_ingredient
@@ -255,47 +194,33 @@ UNION ALL
 	SELECT 1, 3, 1, ? /*oz*/
 </pre>
 
-
 _Result:_
-
 
 <pre>
 last insert id = 2, changes = 2
 </pre>
 
 
-
-
 # select examples
-
-
 
 
 ## select * from recipe
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.select().from("recipe")
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 SELECT * FROM recipe 
 </pre>
 
-
 _Result:_
-
 
 <pre>
 [ { id: 1, feeds: 2, name: 'omelet' },
@@ -304,147 +229,102 @@ _Result:_
 </pre>
 
 
-
-
 ## select distinct id from recipe
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.select("id").distinct().from("recipe")
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 SELECT DISTINCT id FROM recipe 
 </pre>
 
-
 _Result:_
-
 
 <pre>
 [ { id: 1 }, { id: 2 }, { id: 3 } ]
 </pre>
 
 
-
-
 ## select even ids
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.select("id").distinct().from("recipe").where("id % 2 = 0")
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 SELECT DISTINCT id FROM recipe  WHERE (id % 2 = 0)
 </pre>
 
-
 _Result:_
-
 
 <pre>
 [ { id: 2 } ]
 </pre>
 
 
-
-
 ## select ids over some user value (2 in this example)
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.select("id").from("recipe").where(sql.$("id > ?", 2))
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 SELECT id FROM recipe  WHERE (id > ? /*2*/)
 </pre>
 
-
 _Result:_
-
 
 <pre>
 [ { id: 3 } ]
 </pre>
 
 
-
-
 ## select ids from a set of values
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.select("id").from("recipe").where(sql.$("id IN (?)", [1, 2, 3, 4]))
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 SELECT id FROM recipe  WHERE (id IN (? /*1*/, ? /*2*/, ? /*3*/, ? /*4*/))
 </pre>
 
-
 _Result:_
-
 
 <pre>
 [ { id: 1 }, { id: 2 }, { id: 3 } ]
 </pre>
 
 
-
-
 ## select * from recipe join recipe_ingredient join ingredient
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.select().from("recipe")
@@ -453,18 +333,13 @@ sql.select().from("recipe")
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 SELECT * FROM recipe LEFT JOIN recipe_ingredient ON recipe.id = recipe_ingredient.recipe_id LEFT JOIN ingredient ON recipe_ingredient.ingredient_id = ingredient.id
 </pre>
 
-
 _Result:_
-
 
 <pre>
 [ { id: 1,
@@ -498,15 +373,10 @@ _Result:_
 </pre>
 
 
-
-
 ## select * from recipe join recipe_ingredient join ingredient, using aliased table names
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.select().from({"r": "recipe"})
@@ -515,18 +385,13 @@ sql.select().from({"r": "recipe"})
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 SELECT * FROM recipe AS r LEFT JOIN recipe_ingredient AS ri ON r.id = ri.recipe_id LEFT JOIN ingredient AS i ON ri.ingredient_id = i.id
 </pre>
 
-
 _Result:_
-
 
 <pre>
 [ { id: 1,
@@ -560,15 +425,10 @@ _Result:_
 </pre>
 
 
-
-
 ## the same, using aliased columns
 
 
-
-
 _Javascript:_
-
 
 <pre>
 sql.select({
@@ -582,18 +442,13 @@ sql.select({
 </pre>
 
 
-
-
 _SQL:_
-
 
 <pre>
 SELECT r.id AS recipe_id, r.name AS recipe_name, i.id AS ingredient_id, i.name AS ingredient_name FROM recipe AS r LEFT JOIN recipe_ingredient AS ri ON r.id = ri.recipe_id LEFT JOIN ingredient AS i ON ri.ingredient_id = i.id
 </pre>
 
-
 _Result:_
-
 
 <pre>
 [ { recipe_id: 1,
@@ -613,6 +468,5 @@ _Result:_
     ingredient_id: null,
     ingredient_name: null } ]
 </pre>
-
 
 that's it!
