@@ -3,9 +3,15 @@ node-rdbql
 
 (yet another) SQL syntax helper for node.js
 
-*This package isn't available via npm, the basics arent't all there yet. The idea is to get sqlite3 and mysql up and running for the following statements: create table, select, insert, update, delete.*
+## Install
 
-*sqlite3 works for all except delete; MySQL support has not been tested yet.*
+<pre>
+npm install [-g] rdbql
+</pre>
+
+## Status
+
+All examples have been tested with sqlite3. They *should* work with MySQL as well, and maybe postgre, but that hasn't been tested yet.
 
 ## Why?
 
@@ -55,3 +61,11 @@ function filter(params) {
 * [Select statements](docs/select.md)
 * [Update statements](docs/update.md)
 * [delete statements](docs/delete.md)
+
+##  Current TODO list
+
+* add wrappers for column definitions in sql.createTable to have compatible SQL between engines
+* test examples with mysql/postgre (and debug as needed)
+* write formal documentation
+* write examples for more cases (expressions, group by, order by, limit, subselects...)
+* make the library usable in the browser
