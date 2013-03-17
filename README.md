@@ -37,7 +37,7 @@ var sql = require("rdbql").dialect('sqlite3');
 function filter(params) {
   var select = sql.select().from("t");
   for (var key in params) {
-    select.where(key + ' = ' + sql.$(params[key]));
+    select.where($(key + ' = ?', params[key]));
   }
   return {"q": select.toString(), "params": select.params()};
 }
