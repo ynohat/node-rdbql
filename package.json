@@ -1,9 +1,10 @@
 {
     "name": "rdbql",
     "description": "Cross compatible SQL query builder for node",
+    "keywords": ["sql", "syntax", "sqlite3", "mysql", "rdbms", "query builder", "query"],
     "main": "./lib/rdbql.js",
-    "author": "Anthony Hogg",
-    "version": "0.0.1",
+    "author": "Anthony Hogg (ynohat)",
+    "version": "0.0.3",
     "repository" : {
         "type" : "git",
         "url" : "http://github.com/ynohat/node-rdbql.git"
