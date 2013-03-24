@@ -4,7 +4,7 @@
     "keywords": ["sql", "syntax", "sqlite3", "mysql", "rdbms", "query builder", "query"],
     "main": "./lib/rdbql.js",
     "author": "Anthony Hogg (ynohat)",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "repository" : {
         "type" : "git",
         "url" : "http://github.com/ynohat/node-rdbql.git"
