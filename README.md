@@ -3,6 +3,8 @@ node-rdbql
 
 (yet another) SQL syntax helper for node.js
 
+*I don't expect to do any work on this any more.*
+
 ## Install
 
 <pre>
